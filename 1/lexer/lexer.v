@@ -78,7 +78,7 @@ pub fn (l mut Lexer) next_token() token.Token {
 				return tok
 			} else {
 				tok = new_token_s(.tok_illegal,
-					"ILLEGAL char at absolute index ${l.pos}: '${l.ch}'")
+					"ILLEGAL char at absolute index ${l.pos}: '${l.ch.str()}'")
 			}
 		}
 	}
