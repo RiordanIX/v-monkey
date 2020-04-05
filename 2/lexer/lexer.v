@@ -78,7 +78,7 @@ pub fn (l mut Lexer) next_token() token.Token {
 				return tok
 			} else {
 				tok = new_token_s(.tok_illegal,
-					"ILLEGAL char at absolute index ${l.pos}: '${l.ch}'")
+					"ILLEGAL char at absolute index ${l.pos}: '${l.ch.str()}'")
 			}
 		}
 	}
@@ -125,10 +125,6 @@ fn (l mut Lexer) skip_whitespace() {
 }
 
 fn (l Lexer) peek_char() byte {
-	if l.read_pos >= l.input.len {
-		return 0
-	} else {
-		return l.input[l.read_pos]
-	}
+	return if l.read_pos >= l.input.len { 0 } else { l.input[l.read_pos] }
 }
 

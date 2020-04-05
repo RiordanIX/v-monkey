@@ -37,7 +37,8 @@ fn (p &Program) token_literal() string {
 }
 
 
-// A LetStatment is what declares a variable. It needs to allow any expression be assigned to the Identifier
+// A LetStatment is what declares a variable. It needs to allow any expression
+// be assigned to the Identifier
 pub struct LetStatement {
 pub:
 	token tk.Token

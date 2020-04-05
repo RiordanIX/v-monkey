@@ -125,10 +125,6 @@ fn (l mut Lexer) skip_whitespace() {
 }
 
 fn (l Lexer) peek_char() byte {
-	if l.read_pos >= l.input.len {
-		return 0
-	} else {
-		return l.input[l.read_pos]
-	}
+	return if l.read_pos >= l.input.len { 0 } else { l.input[l.read_pos] }
 }
 
