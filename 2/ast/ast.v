@@ -4,23 +4,9 @@ import (
 	token as tk
 )
 
-interface Node {
-	token_literal() string
-}
+pub type Statement = LetStatement
 
-interface Statement {
-	// v Replace with `Node` when implemented
-	token_literal() string
-	// ^
-	statement_node()
-}
-
-interface Expression {
-	// v Replace with `Node` when implemented
-	token_literal() string
-	// ^
-	expression_node()
-}
+pub type Expression = Identifier
 
 // The Program node is our root Node for the entire program.
 pub struct Program {
@@ -28,16 +14,17 @@ pub mut:
 	statements []Statement
 }
 
-fn (p &Program) token_literal() string {
+pub fn (p &Program) token_literal() string {
 	if p.statements.len > 0 {
-		return p.statements[0].TokenLiteral()
+		return p.statements[0].token_literal()
 	} else {
 		return ''
 	}
 }
 
 
-// A LetStatment is what declares a variable. It needs to allow any expression
+// STATEMENTS::::::::
+// A LetStatement is what declares a variable. It needs to allow any expression
 // be assigned to the Identifier
 pub struct LetStatement {
 pub:
@@ -47,9 +34,13 @@ pub mut:
 	value Expression
 }
 
-fn (ls &LetStatement) statement_node() {}
-fn (ls &LetStatement) token_literal() string { return ls.token.literal }
+pub fn (s &Statement) token_literal() string {
+	match s {
+		else {return it.token.literal }
+	}
+}
 
+// EXPRESSIONS::::::::::
 pub struct Identifier {
 pub:
 	token tk.Token
@@ -57,6 +48,9 @@ pub mut:
 	value string
 }
 
-fn (i &Identifier) expression_node() {}
-fn (i &Identifier) token_literal() string { return i.token.literal }
+pub fn (e &Expression) token_literal() string {
+	match e {
+		else {return it.token.literal }
+	}
+}
 
